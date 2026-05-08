@@ -1,0 +1,57 @@
+name: Deploy PWA and Create APK
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-pwa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: cd client && npm install
+        
+      - name: Build PWA
+        run: cd client && npm run build
+        
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./client/dist
+
+  create-apk:
+    needs: deploy-pwa
+    runs-on: ubuntu-latest
+    steps:
+      - name: PWA to APK
+        uses: pwa-builder/pwa-action@v1
+        with:
+          url: https://OreoMuncher45.github.io/inkwell/
+          name: Inkwell Notes
+          packageId: com.oreomuncher45.inkwell
+          version: 1.0.0
+          
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./*apk
+          tag_name: latest-pwa
+          name: PWA Android App
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

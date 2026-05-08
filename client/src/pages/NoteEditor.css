@@ -1,0 +1,223 @@
+.editor-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-primary);
+  height: 100%;
+  position: relative;
+}
+
+.editor-container.loading {
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
+
+.editor-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  height: var(--header-height);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  z-index: 10;
+}
+
+.save-status {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-hover);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.editor-content-wrapper {
+  flex: 1;
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 769px) {
+  .editor-content-wrapper {
+    padding: 40px;
+  }
+  
+  .editor-topbar {
+    padding: 16px 40px;
+    border-bottom: none;
+  }
+}
+
+.editor-title {
+  font-size: 2rem;
+  font-weight: 600;
+  border: none;
+  background: none;
+  outline: none;
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .editor-title {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.advanced-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.advanced-editor .ql-toolbar.ql-snow {
+  display: none; /* Hide default toolbar */
+}
+
+.bottom-toolbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1px solid var(--color-border);
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+}
+
+@media (min-width: 769px) {
+  .bottom-toolbar {
+    left: var(--sidebar-width);
+    padding: 12px 40px;
+  }
+}
+
+.toolbar-main {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.toolbar-advanced {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px dashed var(--color-border);
+  width: 100%;
+}
+
+.bottom-toolbar.show-advanced .toolbar-advanced {
+  display: flex;
+}
+
+.bottom-toolbar .ql-snow.ql-toolbar button,
+.bottom-toolbar .toolbar-toggle-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+}
+
+.bottom-toolbar .ql-snow.ql-toolbar button:active,
+.bottom-toolbar .toolbar-toggle-btn:active {
+  background-color: var(--color-bg-hover);
+}
+
+.bottom-toolbar .ql-snow.ql-toolbar button.ql-active {
+  color: var(--color-accent);
+}
+
+.bottom-toolbar.show-advanced .toolbar-toggle-btn {
+  color: var(--color-accent);
+  background-color: rgba(217, 115, 77, 0.05);
+}
+
+.advanced-editor .ql-container.ql-snow {
+  border: none;
+  font-family: var(--font-editorial);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+}
+
+.advanced-editor .ql-editor {
+  padding: 24px 0;
+  min-height: 400px;
+}
+
+.advanced-editor .ql-editor.ql-blank::before {
+  left: 0;
+  color: #CCC;
+  font-style: normal;
+}
+
+.advanced-editor .ql-snow .ql-stroke {
+  stroke: var(--color-text-secondary);
+}
+
+.advanced-editor .ql-snow .ql-fill {
+  fill: var(--color-text-secondary);
+}
+
+.advanced-editor .ql-snow.ql-toolbar button:hover .ql-stroke,
+.advanced-editor .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+  stroke: var(--color-accent);
+}
+
+.advanced-editor .ql-snow.ql-toolbar button:hover .ql-fill,
+.advanced-editor .ql-snow.ql-toolbar button.ql-active .ql-fill {
+  fill: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .advanced-editor .ql-toolbar.ql-snow {
+    padding: 4px 0;
+  }
+}
+
+.mobile-fab {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: 0 4px 12px rgba(217, 115, 77, 0.3);
+  z-index: 20;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.mobile-fab:active {
+  transform: scale(0.95);
+  background-color: var(--color-accent-hover);
+}
+
+@media (min-width: 769px) {
+  .mobile-fab {
+    display: none;
+  }
+}
